@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const morgan = require('morgan');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const path = require('path');
 
 const cors = require('cors');
 const corsOptions ={
@@ -25,6 +26,9 @@ const adsRoutes = require('./routes/ads');
 //app
 const app = express();
 
+
+
+
 //db
 mongoose
 .connect(process.env.DATABASE)
@@ -34,6 +38,7 @@ mongoose
 app.use(morgan('dev'));
 app.use(bodyParser.json());
 app.use(cookieParser());
+app.use(express.static("uploads"));
 
 //cors
 if(process.env.NODE_ENV === 'development'){

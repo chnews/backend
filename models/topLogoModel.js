@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const adsSchema = mongoose.Schema({
+const logoSchema = mongoose.Schema({
     name: {
         type: String,
         required: false
@@ -10,9 +10,7 @@ const adsSchema = mongoose.Schema({
         data: Buffer,
         contentType: String
     }
-}, { timestamps: true }
-
-);
+}, { timestamps: true });
 
 
-module.exports = adsModel = mongoose.model('adsModel',adsSchema);
+module.exports = topLogoModel = mongoose.model('topLogoModel', logoSchema, 'logo');

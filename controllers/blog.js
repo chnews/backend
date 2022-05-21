@@ -46,11 +46,17 @@ exports.create = (req, res) => {
             });
         }
 
+        function slugifi(text) {
+            return text.toLowerCase().replace(text, text).replace(/^-+|-+$/g, '')
+                .replace(/\s/g, '-').replace(/\-\-+/g, '-');
+        
+        }
+
         let blog = new Blog();
         blog.title = title;
         blog.body = body;
         blog.excerpt = smartTrim(body, 200, ' ', ' ...');
-        blog.slug = slugify(title).toLowerCase();
+        blog.slug = slugifi(title);
         blog.mtitle = `${title} | ${process.env.APP_NAME}`;
         blog.mdesc = body.substring(0, 160);
         blog.postedBy = req.user._id;
@@ -64,7 +70,7 @@ exports.create = (req, res) => {
                     error: 'Image should be less then 1mb in size'
                 });
             }
-            blog.photo.data = fs.readFileSync(files.photo.path);
+            blog.photo.data = fs.readFileSync(files.photo.filepath);
             blog.photo.contentType = files.photo.type;
         }
 
@@ -260,7 +266,7 @@ exports.update = (req, res) => {
                         error: 'Image should be less then 1mb in size'
                     });
                 }
-                oldBlog.photo.data = fs.readFileSync(files.photo.path);
+                oldBlog.photo.data = fs.readFileSync(files.photo.filepath);
                 oldBlog.photo.contentType = files.photo.type;
             }
 
@@ -291,6 +297,8 @@ exports.photo = (req, res) => {
             return res.send(blog.photo.data);
         });
 };
+
+
 
 exports.listRelated = (req, res) => {
     // console.log(req.body.blog);
