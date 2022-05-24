@@ -6,6 +6,8 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 
+
+
 const cors = require('cors');
 const corsOptions ={
     origin:'*', 
@@ -59,7 +61,9 @@ app.use('/api', pageRoute);
 
 //port
 const port = process.env.PORT || 5000
-app.listen(port, () => {
+let server = app.listen(port, () => {
     console.log(`Server running on port ${port}`)
 });
+
+server.timeout = 10000000;
 
