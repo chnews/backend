@@ -61,9 +61,7 @@ app.use('/api', pageRoute);
 
 //port
 const port = process.env.PORT || 5000
-let server = app.listen(port, () => {
+app.listen(port, () => {
     console.log(`Server running on port ${port}`)
 });
-
-server.timeout = 10000000;
 
