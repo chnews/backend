@@ -21,6 +21,7 @@ const userRoutes = require('./routes/user');
 const categoryRoutes = require('./routes/category');
 const tagRoutes = require('./routes/tag');
 const adsRoutes = require('./routes/ads');
+const pageRoute = require('./routes/page');
 
 
 //app
@@ -53,6 +54,7 @@ app.use('/api', userRoutes);
 app.use('/api', categoryRoutes);
 app.use('/api', tagRoutes);
 app.use('/api', adsRoutes);
+app.use('/api', pageRoute);
 
 
 //port

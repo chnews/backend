@@ -41,6 +41,7 @@ exports.read = (req, res) => {
         }
         // res.json(category);
         Blog.find({ categories: category })
+            .sort({createdAt: -1})
             .populate('categories', '_id name slug')
             .populate('tags', '_id name slug')
             .populate('postedBy', '_id name')
